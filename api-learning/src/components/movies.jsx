@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import MovieCard from "../templates/snipets/MovieCard";
 
 const Movies = () => {
-  const [movieName, setMovieName] = useState();
+  const [movieName, setMovieName] = useState("Lord of the rings");
+  const [movieData, setMovieData] = useState({});
 
   const searchMovieByTitle = () => {
     axios
@@ -11,8 +13,12 @@ const Movies = () => {
           import.meta.env.VITE_OMDBAPI_KEY
         }`
       )
-      .then((response) => console.log(response));
+      .then((response) => setMovieData(response.data));
   };
+
+  useEffect(() => {
+    searchMovieByTitle();
+  }, []);
 
   return (
     <>
@@ -25,6 +31,8 @@ const Movies = () => {
           Search movie
         </button>
       </form>
+
+      <MovieCard movie={movieData} />
     </>
   );
 };
