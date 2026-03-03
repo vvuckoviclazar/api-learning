@@ -1,10 +1,10 @@
 const MovieCard = ({ movie }) => {
   return (
-    <>
-      <img src={movie.Poster} />
+    <div className="col-3 text-white">
+      <img className="w-50" src={movie.Poster} />
       <h1>{movie.Title}</h1>
-      <p>{movie.Plot}</p>
-    </>
+      <p>{movie.Year}</p>
+    </div>
   );
 };
 
